@@ -28,16 +28,16 @@ def on_disconnect(client, userdata, rc):
 # instantiate MQTT client
 mqttc = mqtt.Client(client_id = "", clean_session = True, userdata = None, protocol = mqtt.MQTTv311)
 
-# connect to MQTT broker (raspberry pi)
-mqttc.connect("localhost", 1883, keepalive = 60, bind_address = "")
-mqttc.loop_start() # start background thread
-
 # set callbacks
 mqttc.on_connect = on_connect
 mqttc.on_publish = on_publish
 mqttc.on_subscribe = on_subscribe
 mqttc.on_message = on_message
 mqttc.on_disconnect = on_disconnect
+
+# connect to MQTT broker (raspberry pi)
+mqttc.connect("localhost", 1883, keepalive = 60, bind_address = "")
+mqttc.loop_start() # start background thread
 
 # subscribe to topic
 mqttc.subscribe("ishnalaIOT", qos = 0)
