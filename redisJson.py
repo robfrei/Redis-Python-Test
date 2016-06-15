@@ -82,7 +82,7 @@ while run:
     print("JSON2: " + j2 + "\n")
     
     # push the data to redis_list
-    r.lpush('redis_list', j2)
+    r.lpush('redis_list', msg1)
     r.ltrim('redis_list', 0, 99)
     redis_list = r.lrange('redis_list', 0, -1)
     print("Redis List 1: " + str(redis_list) + "\n")
