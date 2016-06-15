@@ -64,37 +64,13 @@ while run:
             'sensorValue': temp,
     }})
     print("Original String: " + msg1 + "\n")
-    
-    # convert python string to bytes (encode)
-    msg2 = msg1.encode('utf8')
-    print("Encoded: " + str(msg2) + "\n")
-    
-    # convert bytes back to string (decode)
-    msg3 = msg2.decode('utf8')
-    print("Decoded: " + msg3 + "\n")
-    
-    # json loads example (j is now a dict, must convert to string to print)
-    j1 = json.loads(msg1)
-    print("JSON1: " + str(j1) + "\n")
-    
-    # json dumps example (j2 is a string - however, double quotes now utilize backslashes)
-    j2 = json.dumps(msg1)
-    print("JSON2: " + j2 + "\n")
-    
+
     # push the data to redis_list
     r.lpush('redis_list', msg1)
     r.ltrim('redis_list', 0, 99)
     redis_list = [json.loads(list_item.decode('utf-8')) for list_item in r.lrange('redis_list', 0, -1)]
     print("Redis List 1: " + str(redis_list) + "\n")
-    
-    # push the data to redis_list2
-    r.lpush('redis_list2', j1)
-    r.ltrim('redis_list2', 0, 99)
-    redis_list2 = r.lrange('redis_list2', 0, -1)
-    rl = [x.decode('utf-8') for x in redis_list2]
-    print("Redis List 2: " + str(rl) + "\n")
-    
-    
+
     #(rc, mid) = mqttc.publish("ishnalaIOT", '{"preload_sensor_01": ' + str(redis_list) + '}', qos = 0)
     
     time.sleep(5)
