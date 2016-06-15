@@ -57,7 +57,12 @@ while run:
     timestamp = "".join((timestamp, ts_id))
     
     # construct JSON message as string
-    msg1 = '{"' + timestamp + '": {"type": "temperature", "location": "study", "sensorValue": ' + temp + '}}'
+    msg1 = json.dumps({
+        timestamp: {
+            'type': 'temperature',
+            'location': 'study',
+            'sensorValue': temp,
+    }})
     print("Original String: " + msg1 + "\n")
     
     # convert python string to bytes (encode)
