@@ -49,8 +49,8 @@ run = True
 while run:
     
     # generate random temperature between 0 and 15 (60 - 75)
-    temp = str(60 + random.randrange(16))
-    
+    temp = 60 + random.randrange(16)
+
     # generate timestamp
     ts_id = str(random.randrange(1001)).zfill(4)
     timestamp = time.strftime("sensor_01_%Y_%m_%d_%H_%M_%S_", time.localtime())
