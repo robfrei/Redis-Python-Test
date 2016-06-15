@@ -47,7 +47,7 @@ r = redis.StrictRedis(host = 'localhost', port = 6379, db = 0)
 
 run = True
 while run:
-    
+
     # generate random temperature between 0 and 15 (60 - 75)
     temp = 60 + random.randrange(16)
 
@@ -55,7 +55,7 @@ while run:
     ts_id = str(random.randrange(1001)).zfill(4)
     timestamp = time.strftime("sensor_01_%Y_%m_%d_%H_%M_%S_", time.localtime())
     timestamp = "".join((timestamp, ts_id))
-    
+
     # construct JSON message as string
     msg1 = json.dumps({
         timestamp: {
@@ -72,5 +72,5 @@ while run:
     print("Redis List 1: " + str(redis_list) + "\n")
 
     #(rc, mid) = mqttc.publish("ishnalaIOT", '{"preload_sensor_01": ' + str(redis_list) + '}', qos = 0)
-    
+
     time.sleep(5)
